@@ -1,22 +1,22 @@
 package model;
 
 public class CreateUser {
-    private String login;
+    private String email;
     private String password;
-    private String firstName;
+    private String name;
 
-    public CreateUser(String login, String password, String firstName) {
-        this.login = login;
+    public CreateUser(String email, String password, String name) {
+        this.email = email;
         this.password = password;
-        this.firstName = firstName;
+        this.name = name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -27,11 +27,11 @@ public class CreateUser {
         this.password = password;
     }
 
-    public String getLogin() {
-        return login;
+    public String getName() {
+        return name;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setName(String name) {
+        this.name = name;
     }
 }
