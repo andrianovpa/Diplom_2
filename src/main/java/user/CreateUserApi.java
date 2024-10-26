@@ -10,7 +10,7 @@ public class CreateUserApi extends BaseHttpsClient {
     private final String apiPath = "/api/auth/register";
 
     @Step("Отправляется запрос на создание пользователя")
-    public Response createUser(CreateUser courier) {
-        return doPostRequest(apiPath, courier);
+    public Response createUser(CreateUser createUser) {
+        return doPostRequest(apiPath, createUser);
     }
 }
