@@ -1,4 +1,4 @@
-package createUser;
+package createuser;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
@@ -6,8 +6,8 @@ import model.CreateUser;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import user.CreateUserApi;
-import user.DeleteUserApi;
+import api.CreateUserApi;
+import api.DeleteUserApi;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 

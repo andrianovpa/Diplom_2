@@ -1,12 +1,12 @@
-package createUser;
+package createuser;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import model.CreateUser;
 import org.junit.After;
 import org.junit.Test;
-import user.CreateUserApi;
-import user.DeleteUserApi;
+import api.CreateUserApi;
+import api.DeleteUserApi;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.notNullValue;

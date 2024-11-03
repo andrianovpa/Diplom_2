@@ -1,4 +1,4 @@
-package user;
+package api;
 
 import base.BaseHttpsClient;
 import io.qameta.allure.Step;
@@ -11,5 +11,10 @@ public class EditUserApi extends BaseHttpsClient {
     @Step("Отправка запроса на изменение пользователя")
     public Response editUser(EditUser editUser, String token) {
         return doPatchRequest(apiPath, editUser, token);
+    }
+
+    @Step("Отправка запроса на изменение пользователя без авторизации пользователя")
+    public Response editUserWithoutAuth(EditUser editUser) {
+        return doPatchRequestWithoutAuth(apiPath, editUser);
     }
 }

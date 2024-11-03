@@ -1,4 +1,4 @@
-package loginTest;
+package login;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
@@ -9,9 +9,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import user.CreateUserApi;
-import user.DeleteUserApi;
-import user.LoginUserApi;
+import api.CreateUserApi;
+import api.DeleteUserApi;
+import api.LoginUserApi;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 

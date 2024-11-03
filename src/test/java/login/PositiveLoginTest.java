@@ -1,4 +1,4 @@
-package loginTest;
+package login;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
@@ -7,9 +7,9 @@ import model.LoginUser;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import user.CreateUserApi;
-import user.DeleteUserApi;
-import user.LoginUserApi;
+import api.CreateUserApi;
+import api.DeleteUserApi;
+import api.LoginUserApi;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.notNullValue;

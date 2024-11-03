@@ -7,6 +7,7 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -29,6 +30,13 @@ public abstract class BaseHttpsClient {
                 .get(path)
                 .thenReturn();
     }
+    protected Response doGetRequest(String path, String token) {
+        return given()
+                .spec(baseRequestSpec())
+                .header("Authorization", token)
+                .get(path)
+                .thenReturn();
+    }
 
     protected Response doPostRequest(String path, Object body) {
         return given()
@@ -38,11 +46,34 @@ public abstract class BaseHttpsClient {
                 .thenReturn();
     }
 
-    protected Response doPostRequest(String path, Object body, Map<String, String> params) {
+    protected Response doPostRequest(String path, Object body, String token) {
         return given()
                 .spec(baseRequestSpec())
                 .body(body)
-                .params(params)
+                .header("Authorization", token)
+                .post(path)
+                .thenReturn();
+    }
+    protected Response doPostRequest(String path, List<String> body, String token) {
+        return given()
+                .spec(baseRequestSpec())
+                .body(body)
+                .header("Authorization", token)
+                .post(path)
+                .thenReturn();
+    }
+    protected Response doPostRequest(String path, List<String> body) {
+        return given()
+                .spec(baseRequestSpec())
+                .body(body)
+                .post(path)
+                .thenReturn();
+    }
+
+    protected Response doPostRequest(String path, String token) {
+        return given()
+                .spec(baseRequestSpec())
+                .header("Authorization", token)
                 .post(path)
                 .thenReturn();
     }
@@ -54,10 +85,20 @@ public abstract class BaseHttpsClient {
                 .delete(path)
                 .thenReturn();
     }
+
     protected Response doPatchRequest(String path, Object body, String token) {
         return given()
                 .spec(baseRequestSpec())
+                .body(body)
                 .header("Authorization", token)
+                .patch(path)
+                .thenReturn();
+    }
+
+    protected Response doPatchRequestWithoutAuth(String path, Object body) {
+        return given()
+                .spec(baseRequestSpec())
+                .body(body)
                 .patch(path)
                 .thenReturn();
     }
