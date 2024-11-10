@@ -10,7 +10,7 @@ public class GetIngredientsApi extends BaseHttpsClient {
     private final String apiPath = "/api/ingredients";
 
     @Step("Отправляется запрос на получение списка ингредиентов")
-    public Response getIngredients(GetIngredients getIngredients) {
+    public Response getIngredients() {
         return doGetRequest(apiPath);
 
     }

@@ -1,14 +1,13 @@
 package model;
 
-import api.CreateOrderApi;
-import api.CreateUserApi;
-import api.DeleteUserApi;
-import api.GetOrdersUserApi;
+import api.*;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -24,9 +23,11 @@ public class GetOrdersUserTest {
         CreateUserApi createUserApi = new CreateUserApi();
         CreateUser createUser = new CreateUser(email, password, name);
         accessToken = createUserApi.createUser(createUser).then().extract().path("accessToken");
+        GetIngredientsApi getIngredientsApi = new GetIngredientsApi();
+        List<String> ingredientIds = getIngredientsApi.getIngredients().then().statusCode(200).extract().jsonPath().getList("data._id");
         GetIngredients getIngredients = new GetIngredients();
-        getIngredients.add("61c0c5a71d1f82001bdaaa70");
-        getIngredients.add("61c0c5a71d1f82001bdaaa72");
+        getIngredients.add(ingredientIds.get(0));
+        getIngredients.add(ingredientIds.get(2));
         CreateOrderApi createOrderApi = new CreateOrderApi();
         createOrderApi.createOrder(getIngredients, accessToken);
     }

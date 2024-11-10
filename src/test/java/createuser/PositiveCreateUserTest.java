@@ -3,6 +3,7 @@ package createuser;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import model.CreateUser;
+import model.RandomData;
 import org.junit.After;
 import org.junit.Test;
 import api.CreateUserApi;
@@ -14,9 +15,10 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 
 public class PositiveCreateUserTest {
-    private static String email = "andrianovpa@gmail.com";
-    private static String password = "12345678";
-    private static String name = "Pavel";
+    private static String randomEmail = RandomData.randomEmail();
+    private static String randomPassword = RandomData.randomPassword(8);
+    private static String randomName = RandomData.randomName();
+
     private static String accessToken;
 
     @After
@@ -35,14 +37,14 @@ public class PositiveCreateUserTest {
     public void positiveCreateUserTest() {
 
         CreateUserApi createUserApi = new CreateUserApi();
-        CreateUser createUser = new CreateUser(email, password, name);
+        CreateUser createUser = new CreateUser(randomEmail, randomPassword, randomName);
         accessToken = createUserApi.createUser(createUser)
                 .then().statusCode(200).assertThat()
                 .body("success", equalTo(true))
                 .body("accessToken", containsString("Bearer "))
                 .body("refreshToken", notNullValue())
-                .body("user.email", equalTo(email))
-                .body("user.name", equalTo(name))
+                .body("user.email", equalTo(randomEmail))
+                .body("user.name", equalTo(randomName))
                 .extract().path("accessToken");
     }
 }

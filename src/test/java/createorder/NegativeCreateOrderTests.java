@@ -7,6 +7,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import model.CreateUser;
 import model.GetIngredients;
+import model.RandomData;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,14 +16,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class NegativeCreateOrderTests {
     private static String accessToken;
-    private static String email = "andrianovpa@gmail.com";
-    private static String password = "12345678";
-    private static String name = "Pavel";
+    private static String randomEmail = RandomData.randomEmail();
+    private static String randomPassword = RandomData.randomPassword(8);
+    private static String randomName = RandomData.randomName();
 
     @BeforeClass
     public static void createUserForTest() {
         CreateUserApi createUserApi = new CreateUserApi();
-        CreateUser createUser = new CreateUser(email, password, name);
+        CreateUser createUser = new CreateUser(randomEmail, randomPassword, randomName);
         accessToken = createUserApi.createUser(createUser).then().extract().path("accessToken");
     }
 
@@ -50,8 +51,8 @@ public class NegativeCreateOrderTests {
     @Description("Направление запроса на создание заказа c неверным хешем ингредиентов")
     public void negativeCreateOrderInvalidHashIngredientsTest() {
         GetIngredients getIngredients = new GetIngredients();
-        getIngredients.add("61c0c5a71d1f82001bdaaa7012312312312dasda");
-        getIngredients.add("61c0c5a71d1f82001bdaaa723123123123112asda");
+        getIngredients.add(RandomData.randomHash(30));
+        getIngredients.add(RandomData.randomHash(30));
         CreateOrderApi createOrderApi = new CreateOrderApi();
         createOrderApi.createOrder(getIngredients, accessToken).then().statusCode(500);
     }
